@@ -1,0 +1,50 @@
+<html>
+<head>
+<title>image select</title>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  	<link href="jquery.selectareas.css" rel="stylesheet">
+<!--[if lte IE 8]>
+  <link href="jquery.selectareas.ie8.css" rel="stylesheet">
+<![endif]-->
+
+<script src="jquery.selectareas.js"></script>
+  
+  <script>
+  $(document).ready(function () {
+      $('.photo').selectAreas({
+                allowMove: true
+      });
+      
+      $("#btn").click(function(){
+          var areas = $('.photo').selectAreas('areas');
+					displayAreas(areas);
+      })
+      
+      function displayAreas (areas) {
+				var text = "";
+				$.each(areas, function (id, area) {
+					text += areaToString(area);
+				});
+				output(text);
+			};
+			
+			function output (text) {
+				$('.foo').html(text);
+			}
+			
+			function areaToString (area) {
+				return (typeof area.id === "undefined" ? "" 
+				  : ("Image " + area.id + ": ")) + area.x + ':' + area.y  + ' ' + area.width + 'x' + area.height + '<br />'
+			}
+
+});
+  </script>
+</head>
+<body>
+<img src="hero-panel.jpg" class="photo">
+<button id="btn">Select Areas</button>
+<div class="foo"></div>
+</body>
+</html>
+
+<!--https://www.jqueryscript.net/other/jQuery-Plugin-For-Selecting-Multiple-Areas-of-An-Image-Select-Areas.html-->
