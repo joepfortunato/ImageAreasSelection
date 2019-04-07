@@ -1,96 +1,19 @@
 <html>
 <head>
 <title>image select</title>
+  <link href="jquery.selectareas.css" rel="stylesheet">
+  <link href="./styles.css" rel="stylesheet">
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-  	<link href="jquery.selectareas.css" rel="stylesheet">
-<!--[if lte IE 8]>
-  <link href="jquery.selectareas.ie8.css" rel="stylesheet">
-<![endif]-->
-
-<script src="jquery.selectareas.js"></script>
+  <script src="jquery.selectareas.js"></script>
+  <script src="./main.js"></script> 
   
-  <script>
-  $(document).ready(function () {
-  $("#imagePreview").css('display', 'none');
-  
-	//Image select and preview
-	$("#imgInp").change(function() {
-      readURL(this);
-	  $(this).remove();
-	  $("#image-label").text("Selected Image");
-    });
-	
-	$("#btn").click(function(){
-       var areas = $('.photo').selectAreas('areas');
-			displayAreas(areas);
-    });
-	
-	function readURL(input) {
-    	
-	if (input.files && input.files[0]) {
-		var reader = new FileReader();
-		reader.onload = function(e) {
-		let imageElement = $("#imagePreview");
-		imageElement.css('display', 'block');	
-		imageElement.attr('src', e.target.result);
-		  			triggerImageSelection();
-		}
-		reader.readAsDataURL(input.files[0]);
-	  }
-	}
-
-	function triggerImageSelection(){
-	  $('#imagePreview').selectAreas({
-        allowMove: true 
-       });
-	}
-	
-           
-    function displayAreas (areas) {
-		var text = "";
-			$.each(areas, function (id, area) {
-				text += areaToString(area);
-			});
-			output(text);
-		};
-			
-	function output (text) {
-		$('.foo').html(text);
-	}
-			
-	function areaToString (area) {
-		return (typeof area.id === "undefined" ? "" 
-											   : ("Image " + area.id + ": ")) + area.x + ':' + area.y  + ' ' + area.width + 'x' + area.height + '<br />'
-	}
-
-	
-			
-});
-  </script>
-  
-<style>
-body{
-	background-color: #f0f0f0;
-}
-
-.content {
-  max-width: 70%;
-  margin: auto;
-  text-align: center;
-}
-
-#imagePreview {
-  max-width: 500px;
-  max-height: 500px;
-}
-</style>
 </head>
 <body>
 	<div class="content">
 		<h3>Image Area Selection</h3>
-		<sup>Lorem ipsum sfsdfsdf sfsdsdf this is asdnaspd asdasd</sup><br/>
-		<label id="image-label">Select Image</label><br/>
+		<div class="help-text">This is a proof of concept single page to demonstrate functionality of JQuery image areas selection <a href="https://www.jqueryscript.net/other/jQuery-Plugin-For-Selecting-Multiple-Areas-of-An-Image-Select-Areas.html" target="_blank">plugin</a></div>
 		
+		<label id="image-label">Select Image:</label><br/>
 		<input type="file" accept="image/*" id="imgInp" /><br/>
 		<!-- <img src="hero-panel.jpg" class="photo"> -->
 		<!-- <button id="btn">Select Areas</button> -->
@@ -99,5 +22,3 @@ body{
 	</div>
  </body>
 </html>
-
-<!--https://www.jqueryscript.net/other/jQuery-Plugin-For-Selecting-Multiple-Areas-of-An-Image-Select-Areas.html-->

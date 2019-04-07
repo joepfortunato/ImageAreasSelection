@@ -1,0 +1,29 @@
+body{
+	background-color: #f0f0f0;
+}
+
+.content {
+  height: 100%;
+  max-width: 70%;
+  margin: auto;
+  text-align: center;
+  background: white;
+  border-radius: 9px;
+  padding: 10px;
+}
+
+#imagePreview {
+  max-width: 500px;
+  max-height: 500px;
+}
+
+.help-text{
+  margin-bottom: 10px;
+  font-style: italic;
+  color: #696969;
+}
+
+#image-label{
+	display: inline-block;
+    margin-bottom: 10px;
+}
