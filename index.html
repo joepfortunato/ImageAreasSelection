@@ -11,59 +11,93 @@
   
   <script>
   $(document).ready(function () {
+  $("#imagePreview").css('display', 'none');
+  
 	//Image select and preview
 	$("#imgInp").change(function() {
       readURL(this);
+	  $(this).remove();
+	  $("#image-label").text("Selected Image");
+    });
+	
+	$("#btn").click(function(){
+       var areas = $('.photo').selectAreas('areas');
+			displayAreas(areas);
     });
 	
 	function readURL(input) {
-	  if (input.files && input.files[0]) {
+    	
+	if (input.files && input.files[0]) {
 		var reader = new FileReader();
 		reader.onload = function(e) {
-		  $('#foo1').attr('src', e.target.result);
+		let imageElement = $("#imagePreview");
+		imageElement.css('display', 'block');	
+		imageElement.attr('src', e.target.result);
+		  			triggerImageSelection();
 		}
 		reader.readAsDataURL(input.files[0]);
 	  }
 	}
 
-  $('.photo').selectAreas({
-                allowMove: true
-      });
-      
-      $("#btn").click(function(){
-          var areas = $('.photo').selectAreas('areas');
-					displayAreas(areas);
-      })
-      
-      function displayAreas (areas) {
-				var text = "";
-				$.each(areas, function (id, area) {
-					text += areaToString(area);
-				});
-				output(text);
-			};
+	function triggerImageSelection(){
+	  $('#imagePreview').selectAreas({
+        allowMove: true 
+       });
+	}
+	
+           
+    function displayAreas (areas) {
+		var text = "";
+			$.each(areas, function (id, area) {
+				text += areaToString(area);
+			});
+			output(text);
+		};
 			
-			function output (text) {
-				$('.foo').html(text);
-			}
+	function output (text) {
+		$('.foo').html(text);
+	}
 			
-			function areaToString (area) {
-				return (typeof area.id === "undefined" ? "" 
-				  : ("Image " + area.id + ": ")) + area.x + ':' + area.y  + ' ' + area.width + 'x' + area.height + '<br />'
-			}
+	function areaToString (area) {
+		return (typeof area.id === "undefined" ? "" 
+											   : ("Image " + area.id + ": ")) + area.x + ':' + area.y  + ' ' + area.width + 'x' + area.height + '<br />'
+	}
 
 	
 			
 });
   </script>
+  
+<style>
+body{
+	background-color: #f0f0f0;
+}
+
+.content {
+  max-width: 70%;
+  margin: auto;
+  text-align: center;
+}
+
+#imagePreview {
+  max-width: 500px;
+  max-height: 500px;
+}
+</style>
 </head>
 <body>
-<input type="file" accept="image/*" id="imgInp" />
-<!-- <img src="hero-panel.jpg" class="photo"> -->
-<button id="btn">Select Areas</button>
-<!-- <div class="foo" id="foo"></div> -->
- <img id="foo1" class="photo" src="#" alt="your image" />
-</body>
+	<div class="content">
+		<h3>Image Area Selection</h3>
+		<sup>Lorem ipsum sfsdfsdf sfsdsdf this is asdnaspd asdasd</sup><br/>
+		<label id="image-label">Select Image</label><br/>
+		
+		<input type="file" accept="image/*" id="imgInp" /><br/>
+		<!-- <img src="hero-panel.jpg" class="photo"> -->
+		<!-- <button id="btn">Select Areas</button> -->
+		<img id="imagePreview" src="#" alt="your image" />
+		<div class="foo" id="foo"></div>
+	</div>
+ </body>
 </html>
 
 <!--https://www.jqueryscript.net/other/jQuery-Plugin-For-Selecting-Multiple-Areas-of-An-Image-Select-Areas.html-->
