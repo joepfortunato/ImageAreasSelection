@@ -1,5 +1,4 @@
-
-  $(document).ready(function () {
+$(document).ready(function () {
   $("#imagePreview").css('display', 'none');
   
 	//Image select and preview
